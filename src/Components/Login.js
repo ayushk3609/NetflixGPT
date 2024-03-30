@@ -3,9 +3,9 @@ import Header from './Header'
 import { checkValidateData } from '../utils/Validation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, } from "firebase/auth";
 import { auth } from '../utils/Firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BG_URL, authErrors } from '../utils/Constant';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -19,6 +19,17 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
 
+  const findAuthError = (error) => {
+    for (const [key, val] of Object.entries(authErrors)) {
+      // Check if the current value matches the target value
+      if (val === error) {
+        // Return the key if a match is found
+        return key.split('_').join(' ');
+      }
+    }
+    return null;
+  }
+
   const handlebuttonclick = () => {
     // validate form data
     const message = checkValidateData(email.current.value, password.current.value)
@@ -29,7 +40,7 @@ const Login = () => {
 
     if(!isSignInForm){
       //sign up
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value,name.current.value)
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
@@ -50,8 +61,7 @@ const Login = () => {
       })
       .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode+"-"+errorMessage)
+          setErrorMessage(findAuthError(errorCode))
           // ..
       });
     }else {
@@ -62,8 +72,8 @@ const Login = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        setErrorMessage(errorCode+"-"+errorMessage)
+        console.log(errorCode)
+        setErrorMessage(findAuthError(errorCode))
         // ..
     });
       
@@ -75,12 +85,12 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <img className='absolute' src="https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+      <img className='absolute min-h-screen bg-cover bg-fixed bg-center bg-no-repeat' src={BG_URL}
         alt="Background" srcset="" />
       Login
 
-      <form onSubmit={(e) => e.preventDefault()} className='relative mx-auto mt-28 w-3/12 bg-black bg-opacity-80 p-12 text-white rounded-lg' action="">
-        <h1 className='font-medium text-4xl py-4'>{(isSignInForm) ? "Sign In" : "Sign Up"}</h1>
+      <form onSubmit={(e) => e.preventDefault()} className='w-full md:w-3/12 absolute p-8 md:p-12 m-auto bg-black my-36 right-0 left-0 bg-opacity-80 text-white rounded-lg' action="">
+        <h1 className=' font-medium text-4xl py-4'>{(isSignInForm) ? "Sign In" : "Sign Up"}</h1>
 
         {(!isSignInForm) && <input type="text" ref={name} placeholder='Full Name' className='p-2 bg-gray-700 my-2 w-full rounded-sm' />}
 

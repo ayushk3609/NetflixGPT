@@ -7,8 +7,29 @@ export const API_OPTIONS = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNmNkYWU5MzIyZWMyOTI3YWQ3MzQxZTA0ZDBmMDRiMSIsInN1YiI6IjY1ZTQxODNmMWFkOTNiMDE2MzA2MzIzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GJgrxmroI-FI8ot0gvcCghQrkYrS_SuWv1_hlLC3y4M'
+        Authorization: 'Bearer '+ process.env.REACT_APP_TMDB_KEY,
     }
 };
 
 export const IMG_CDN = "https://image.tmdb.org/t/p/w780/"
+
+export const BG_URL = "https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+
+export const NO_PREVIEW = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"
+
+export const authErrors = {
+    INVALID_LOGIN_CREDENTIALS: "auth/invalid-credential",
+    CREDENTIAL_ALREADY_IN_USE: "auth/credential-already-in-use",
+    EMAIL_EXISTS: "auth/email-already-in-use",
+    INTERNAL_ERROR: "auth/internal-error",
+    INVALID_API_KEY: "auth/invalid-api-key",
+    INVALID_APP_CREDENTIAL: "auth/invalid-app-credential",
+    INVALID_EMAIL: "auth/invalid-email",
+    INVALID_PASSWORD: "auth/wrong-password",
+    REJECTED_CREDENTIAL: "auth/rejected-credential",
+    TIMEOUT: "auth/timeout",
+    USER_DELETED: "auth/user-not-found",
+    WEAK_PASSWORD: "auth/weak-password",
+    TOO_MANY_ATTEMPTS_TRY_LATER: "auth/too-many-requests"
+
+}

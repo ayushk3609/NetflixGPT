@@ -7,6 +7,7 @@ import GPTsearch from './GPTsearch';
 import Header from './Header'
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
+import Footer from './Footer';
 
 
 
@@ -19,7 +20,7 @@ const Browse = () => {
   useUpcomingMovies()
 
   return (
-    <div className=''>
+    <div className='overflow-x-hidden'>
       <Header />
       {showGPTSearch ? (
         <GPTsearch />
@@ -27,6 +28,7 @@ const Browse = () => {
         <>
           <MainContainer />
           <SecondaryContainer />
+          <Footer/>
         </>
       )
       }
