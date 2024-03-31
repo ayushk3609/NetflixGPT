@@ -87,7 +87,7 @@ const Header = () => {
                 {(!isOpen) ? <i className="fa-solid fa-bars w-100" ></i> : <i className="fa-solid fa-xmark" ></i>}
               </Link>
             </div>
-            <ul className={`md:hidden pb-4 absolute text-center text-white bg-black bg-opacity-65 z-[-1] left-0 w-full transition-all duration-300 ease-in ${isOpen ? 'top-16 ' : 'top-[-490px]'}`}>
+            <ul className={`md:hidden pb-4 absolute text-center text-white bg-black bg-opacity-65 left-0 w-full transition-all duration-300 ease-in ${isOpen ? 'top-16 ' : 'top-[-490px]'}`}>
               <li className='py-4 cursor-pointer hover:underline'>Hi, {user.displayName}</li>
               <li className='py-4 cursor-pointer hover:underline'>Manage Profile</li>
               <li className='py-4 cursor-pointer hover:underline'>Account</li>

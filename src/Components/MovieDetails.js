@@ -28,7 +28,7 @@ const MovieDetails = () => {
   return (
 
     <div className='absolute flex text-teal-50 h-full'>
-      <div className=' fixed top-32 md:top-16 left-[calc(50%-172px)] md:left-[calc(50%-260px)]  z-50 w-[340px] h-[360px] md:w-[500px] md:h-[500px] rounded-md bg-slate-900'>
+      <div className=' fixed top-52 md:top-16 left-[calc(50%-172px)] md:left-[calc(50%-260px)]  z-50 w-[340px] h-[360px] md:w-[500px] md:h-[500px] rounded-md bg-slate-900'>
        <MovieInfo detail={movieDetail} video={trailerVideo}/>
       </div>
     </div>
