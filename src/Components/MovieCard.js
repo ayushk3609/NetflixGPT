@@ -4,9 +4,6 @@ import { IMG_CDN, NO_PREVIEW } from '../utils/Constant'
 import { Link } from 'react-router-dom'
 import MovieDetails from './MovieDetails'
 
-
-
-
 const MovieCard = ({ posterpath, id, movie }) => {
   const [click, setClick] = useState(false);
 
@@ -16,7 +13,6 @@ const MovieCard = ({ posterpath, id, movie }) => {
     //useRef has current to sneek which element is being referred
     if ((newRef.current || divRef.current) && (!newRef.current.contains(e.target) || !divRef.current.contains(e.target))) {
       setClick(false)
-
     }
   }
 
@@ -56,4 +52,4 @@ const MovieCard = ({ posterpath, id, movie }) => {
   )
 }
 
-export default MovieCard
+export default MovieCard;

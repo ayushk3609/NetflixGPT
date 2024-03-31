@@ -108,7 +108,8 @@
     border-radius: 50%;
     background: rgb(30 41 59)
   }
-  @media (min-width:320px)  {
+
+  @media (max-width:639px)  {
     .circular-progress::before{
         height:22px;
         width: 22px;

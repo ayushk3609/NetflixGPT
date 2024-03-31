@@ -3,6 +3,7 @@ import MovieList from './MovieList'
 import Footer from './Footer';
 
 
+
 const GeminiMovieSuggestion = () => {
   const { searchResults, movieNames } = useSelector((store) => store.gpt)
 
@@ -11,7 +12,7 @@ const GeminiMovieSuggestion = () => {
     <div>
       <div className='p-4 m-4 bg-black bg-opacity-65'>
         <div>
-          {
+          { 
             movieNames.map((name, index) => (
               <MovieList key={name} title={name} movies={searchResults[index]} />
             ))
