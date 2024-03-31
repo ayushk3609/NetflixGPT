@@ -10,7 +10,7 @@ function DropdownProfile({userName}) {
     });
   }
   return (
-    <div className='flex flex-col text-white-200 dropdownprofile'>
+    <div className='flex flex-col text-white-200 z-50 dropdownprofile'>
       <ul className='flex flex-col gap-1 cursor-pointer text-xs'>
         <li className='p-2'>Hi, {userName}</li>
         <li className='p-2'>Manage Profile</li>

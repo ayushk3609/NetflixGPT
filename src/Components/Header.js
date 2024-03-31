@@ -67,7 +67,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='absolute px-8 py-2 bg-gradient-to-b from-black w-full flex flex-row justify-between z-10'>
+      <div className='absolute px-2 py-2 bg-gradient-to-b from-black w-full flex flex-row justify-between z-10'>
         <img className='w-32 md:w-40 mx-0' src={LOGO}
           alt="logo" />
 
@@ -79,11 +79,11 @@ const Header = () => {
                   SUPPORTED_LANG.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)
                 }
               </select>}
-            <button className='px-2 md:px-4 my-3.5 md:my-5 bg-purple-800 text-xs md:text-sm text-white rounded mx-4'
+            <button className='px-2 md:px-4 my-3.5 md:my-5 mr-6 bg-purple-800 text-xs md:text-sm text-white rounded'
               onClick={handleGPTSearchClick}
             >{showGPTSearch ? language[langKey]?.homePage : "Intelli search"}</button>
             <div onClick={() => setIsOpen(!isOpen)} className="hamburger md:hidden text-lg my-5 cursor-pointer">
-              <Link className="flex font-medium  items-center text-white mr-6 hover:text-gray-400 delay-75 ">
+              <Link className="flex font-medium  items-center text-white mr-2 hover:text-gray-400 delay-75 ">
                 {(!isOpen) ? <i className="fa-solid fa-bars w-100" ></i> : <i className="fa-solid fa-xmark" ></i>}
               </Link>
             </div>
