@@ -25,6 +25,8 @@ const Header = () => {
   const handleGPTSearchClick = () => {
     //toggle GPT Search
     dispatch(toggleGPTSearchView())
+    navigate('/browse')
+
   }
 
   const handleDropdownOpen = () => {
