@@ -56,7 +56,7 @@ const MovieInfo = ({ video, detail }) => {
                     </div>
                     <div className='pl-4 pr-2 pt-1 '>
                         <h2 className='text-sm md:text-base font-semibold'>Overview</h2>
-                        <p className='py-0.5 text-[10px] md:text-sm'>{detail?.overview.split(/[,.]/).splice(0,3).join('.')}.</p>
+                        <p className='py-0.5 text-[10px] md:text-sm'>{detail?.overview.split(' ').splice(0,28).join(' ')} ...</p>
                     </div>
                 </div>
             </div>
