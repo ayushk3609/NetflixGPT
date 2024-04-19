@@ -100,7 +100,7 @@ const Header = () => {
             <div onMouseEnter={handleDropdownOpen} onMouseLeave={handleDropdownClose} className='hidden  md:flex my-5 profile'>
               <img className='size-8 mr-2 cursor-pointer' src={AVATAR}
                 alt="user-logo" />
-              <button className='btn-profile'>&#9660;</button>
+              <button className='btn-profile mr-2'>&#9660;</button>
               {openProfile && <DropdownProfile userName={user.displayName} />}
             </div>
           </div>

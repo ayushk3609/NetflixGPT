@@ -27,7 +27,6 @@ const MovieCard = ({ posterpath, id, movie }) => {
 
   const handleClick = () => {
     setClick(true)
-    console.log(id)
   }
 
   return (
