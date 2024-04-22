@@ -1,12 +1,11 @@
 import '../index.css'
 import { useEffect, useRef, useState } from 'react'
-import { IMG_CDN, NO_PREVIEW } from '../utils/Constant'
+import {  NO_PREVIEW } from '../utils/Constant'
 import { Link } from 'react-router-dom'
 import MovieDetails from './MovieDetails'
 
-const MovieCard = ({ posterpath, id, movie }) => {
+const MovieCard = ({ posterpath, id }) => {
   const [click, setClick] = useState(false);
-
   const newRef = useRef(null)
   const divRef = useRef(null)
   const handleOutsideClick = (e) => {
@@ -35,13 +34,13 @@ const MovieCard = ({ posterpath, id, movie }) => {
         <div ref={newRef}>
           <div onClick={handleClick} className='w-36 md:w-52 z-30 pr-4 hover:scale-110 transition-all duration-500 ' >
             <img
-              className='card'
-              src={(posterpath) ? (IMG_CDN + posterpath) : (NO_PREVIEW)}
+              className='card h-[210px] md:h-[290px]'
+              src={(posterpath === null || posterpath === 'N/A')? NO_PREVIEW : posterpath }
               alt="Movie card" />
           </div>
           <div ref={divRef}>
             {
-              click && <MovieDetails movie={movie} />
+              click && <MovieDetails />
             }
           </div>
         </div>

@@ -1,15 +1,28 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { API_OPTIONS } from "../utils/Constant";
+import { API_OPTIONS, POSTER_URL_OMDB } from "../utils/Constant";
 import { addTopRatedMovies } from '../utils/moviesSlice'
 
 const useTopRatedMovies = () => {
     const dispatch = useDispatch();
     const topRatedMovies = useSelector( store => store.movies.topRatedMovies)
     const getTopRated = async () => {
-        const data = await fetch('https://api.themoviedb.org/3/movie/top_rated?page=1', API_OPTIONS)
+        const data = await fetch('https://api.trakt.tv/movies/favorited/weekly?extended=full', API_OPTIONS)
         const json = await data.json();
-        dispatch(addTopRatedMovies(json.results))
+        const movieIds = json.map(movie => movie.movie.ids['imdb']) //Fetching movie ids from 1st API
+        const movieDataWithPoster = await Promise.all(movieIds.map(async id => {
+            const posterResponse = await fetch( POSTER_URL_OMDB + id)
+            const posterData = await posterResponse.json()
+            const posterUrl = posterData.Poster
+            return {id,posterUrl}
+        }))
+
+        //Combining movieData from first API to Poster from second API
+        const movieData = json.map(movie => {
+            const {posterUrl} = movieDataWithPoster.find(ele => ele.id === movie.movie.ids['imdb'])
+            return {...movie.movie,posterUrl}
+        })
+        dispatch(addTopRatedMovies(movieData))
     }
 
     useEffect(() => {

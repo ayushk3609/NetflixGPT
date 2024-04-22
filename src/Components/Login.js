@@ -72,7 +72,6 @@ const Login = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log(errorCode)
         setErrorMessage(findAuthError(errorCode))
         // ..
     });

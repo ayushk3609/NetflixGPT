@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import useNowPlayingMovies from '../Hooks/useNowPlayingMovies';
+import useTrendingMovies from '../Hooks/useTrendingMovies';
 import usePopularMovies from '../Hooks/usePopularMovies';
 import useTopRatedMovies from '../Hooks/useTopRatedMovies';
 import useUpcomingMovies from '../Hooks/useUpcomingMovies';
@@ -14,7 +14,7 @@ import Footer from './Footer';
 
 const Browse = () => {
   const showGPTSearch = useSelector(store => store.gpt.showGPTSearch);
-  useNowPlayingMovies()
+  useTrendingMovies()
   usePopularMovies()
   useTopRatedMovies()
   useUpcomingMovies()

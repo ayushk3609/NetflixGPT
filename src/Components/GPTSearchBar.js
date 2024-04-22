@@ -31,12 +31,25 @@ const GPTSearchBar = () => {
   //Search Movie in TMDB
   const searchMovieTMDB = async (movie) => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" + movie + "&include_adult=false&language=en-US&page=1",
+      "https://api.trakt.tv/search/movie?query=" + movie ,
       API_OPTIONS
     );
-
     const json = await data.json();
-    return json.results;
+    const movieIds = json.map(movie => movie.movie.ids['imdb']) //Fetching movie ids from 1st API
+        const movieDataWithPoster = await Promise.all(movieIds.map(async id => {
+            const posterResponse = await fetch('https://www.omdbapi.com/?apikey=b60e2fc8&i='+id)
+            const posterData = await posterResponse.json()
+            const posterUrl = posterData.Poster
+            return {id,posterUrl}
+        }))
+
+        //Combining movieData from first API to Poster from second API
+        const movieData = json.map(movie => {
+            const {posterUrl} = movieDataWithPoster.find(ele => ele.id === movie.movie.ids['imdb'])
+            return {...movie.movie,posterUrl}
+        })
+
+    return movieData;
   }
 
   const handleGPTSearchClick = async () => {
@@ -50,7 +63,6 @@ const GPTSearchBar = () => {
       const result = await model.generateContent(prompt);
       const response = result.response;
       const text = response.text()
-      console.log(text);
       const movieContent = text.split(',')
       //for each movie search in TMDB
       const dataPromiseArray = movieContent.map((movie) => {
@@ -59,11 +71,11 @@ const GPTSearchBar = () => {
       //For each movie we will get a promise
       //so at the end we'll have [Promise,Promise,Promise,Promise,Promise]
 
-      const tmdbResults = await Promise.all(dataPromiseArray);
-      const availableMovies = tmdbResults.map(obj => obj.filter(ele => ele.poster_path!=null))
-      if (availableMovies) setLoading(false);
+      const searchResults = await Promise.all(dataPromiseArray);
+      if (searchResults) setLoading(false);
+      const filteredResult = searchResults.map(array => array.filter(ele => ele.ids.imdb !==null))
 
-      dispatch(addGeminiMovieResult({ movieNames: movieContent, searchResults: availableMovies }))
+      dispatch(addGeminiMovieResult({ movieNames: movieContent, searchResults: filteredResult }))
     } catch (error) {
       setErr(error)
     }

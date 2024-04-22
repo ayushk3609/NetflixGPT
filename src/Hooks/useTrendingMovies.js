@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, POSTER_URL_OMDB } from "../utils/Constant";
-import { addUpcomingMovies } from '../utils/moviesSlice'
+import { addTrendingMovies } from '../utils/moviesSlice'
 
-const useUpcomingMovies = () => {
+const useTrendingMovies = () => {
     const dispatch = useDispatch();
-    const upcomingMovies = useSelector( store => store.movies.upcomingMovies)
-    const getUpcomingMovies = async () => {
-        const data = await fetch('https://api.trakt.tv/movies/boxoffice?extended=full', API_OPTIONS)
+    const trendingMovies = useSelector( store => store.movies.trendingMovies)
+
+    const getTrendingMovies = async () => {
+        const data = await fetch('https://api.trakt.tv/movies/trending?extended=full', API_OPTIONS)
         const json = await data.json();
         const movieIds = json.map(movie => movie.movie.ids['imdb']) //Fetching movie ids from 1st API
         const movieDataWithPoster = await Promise.all(movieIds.map(async id => {
@@ -22,14 +23,13 @@ const useUpcomingMovies = () => {
             const {posterUrl} = movieDataWithPoster.find(ele => ele.id === movie.movie.ids['imdb'])
             return {...movie.movie,posterUrl}
         })
-
-        dispatch(addUpcomingMovies(movieData))
+        dispatch(addTrendingMovies(movieData))
     }
 
     useEffect(() => {
-        !upcomingMovies && getUpcomingMovies()
+        !trendingMovies && getTrendingMovies()
     }, [])
 
 }
 
-export default useUpcomingMovies;
+export default useTrendingMovies;

@@ -14,9 +14,9 @@ const MovieDetails = () => {
   const [movieDetail, setMovieDetail] = useState(null)
 
   const getMoviesInfo = async () => {
-    const data = await fetch('https://api.themoviedb.org/3/movie/' + movieId, API_OPTIONS)
+    const data = await fetch('https://api.trakt.tv/search/imdb/'+movieId+'?extended=full', API_OPTIONS)
     const json = await data.json()
-    setMovieDetail(json)
+    setMovieDetail(json[0].movie)
   }
 
   useEffect(() => {

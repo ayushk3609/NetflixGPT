@@ -7,11 +7,10 @@ import { useEffect } from "react";
 const useSearchMovieTrailer = (movieId) =>{
     const dispatch = useDispatch()
     const getMovieVideos = async() =>{
-        const data = await fetch('https://api.themoviedb.org/3/movie/'+movieId+'/videos?language=en-US', API_OPTIONS)
+        const data = await fetch('https://api.trakt.tv/search/imdb/'+movieId+'?extended=full', API_OPTIONS)
         const json = await data.json();
-        const filterData = json.results.filter((video) => video.type === 'Trailer')
-        const trailer = filterData.length ? filterData[0]: json.results[0];
-        dispatch(addClickTrailerVideo(trailer))
+        const trailerKey = (json[0]?.movie && json[0]?.movie?.trailer!==null)?json[0]?.movie?.trailer?.split('=')[1]: 'noKey'
+        dispatch(addClickTrailerVideo(trailerKey))
     };
 
  useEffect(()=> {

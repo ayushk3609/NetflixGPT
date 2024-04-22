@@ -15,9 +15,9 @@ const BrowseShimmer = () => {
 
                         </div>
                     </div>
-                    {fillerRow.map(ele => <div className='py-10'>
+                    {fillerRow.map(ele => <div  className='py-10'>
                         <div className=' grid grid-cols-6 gap-1 p-5'>
-                            {filler.map(ele => <div className=' px-2 w-[180px] h-[240px] bg-slate-700 shimmer '>
+                            {filler.map(ele => <div  className=' px-2 w-[180px] h-[240px] bg-slate-700 shimmer '>
 
                             </div>)}
 
