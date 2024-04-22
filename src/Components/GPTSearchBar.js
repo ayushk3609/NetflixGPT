@@ -37,7 +37,7 @@ const GPTSearchBar = () => {
     const json = await data.json();
     const movieIds = json.map(movie => movie.movie.ids['imdb']) //Fetching movie ids from 1st API
         const movieDataWithPoster = await Promise.all(movieIds.map(async id => {
-            const posterResponse = await fetch('https://www.omdbapi.com/?apikey=b60e2fc8&i='+id)
+            const posterResponse = await fetch('https://www.omdbapi.com/?apikey='+process.env.REACT_APP_OMDB_API_KEY+'&i='+id)
             const posterData = await posterResponse.json()
             const posterUrl = posterData.Poster
             return {id,posterUrl}
